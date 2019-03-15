@@ -1,7 +1,7 @@
 function loadSivs() {
   $.ajax('/api/scopeitems', {
-    success: function (scopeitems) {
-      scopeitems.forEach(function (d) {
+    success: function(scopeitems) {
+      scopeitems.forEach(function(d) {
         appendSiv(d)
       })
     }
@@ -21,7 +21,7 @@ function createSivLi(siv) {
 
 function showSiv(sivId) {
   $.ajax('/api/scopeitems/' + sivId, {
-    success: function (siv) {
+    success: function(siv) {
       showSivDetail(siv)
     }
   })
@@ -38,34 +38,34 @@ function showSivDetail(siv) {
     <input id="updateSivInput" type="text" />
   </div>
   <div>
-    <button onclick="updateSolutionSiv(${siv.id})">Update SI</button>
+    <button onclick="updateSiv(${siv.id})">Update SI</button>
   </div>
 </div>`)
   )
 }
 
-function updateSolutionSiv() {
+function addSiv() {
   var $sivInput = $('#sivInput')
   $.ajax('/api/scopeitems', {
     method: 'POST',
     data: {
       text: $sivInput.val()
     },
-    success: function (siv) {
+    success: function(siv) {
       appendSiv(siv)
       $sivInput.val('')
     }
   })
 }
 
-function updateSolutionPSiv(id) {
+function updateSiv(id) {
   var $updateSivInput = $('#updateSivInput')
   $.ajax(`/api/scopeitems/${id}`, {
     method: 'PUT',
     data: {
       text: $updateSivInput.val()
     },
-    success: function () {
+    success: function() {
       loadSivs()
       $updateSivInput.val('')
     }
@@ -75,7 +75,7 @@ function updateSolutionPSiv(id) {
 function removeSiv(id) {
   $.ajax(`/api/scopeitems/${id}`, {
     method: 'DELETE',
-    success: function (resp) {
+    success: function(resp) {
       removeSivLi(id)
       $('#showSivDetail').html('')
     }
