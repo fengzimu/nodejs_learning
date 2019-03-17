@@ -1,15 +1,19 @@
+var selectedPackageId = '';
+
 function loadSolutionPackages() {
   $.ajax('/api/packages', {
-    success: function(packages) {
-      packages.forEach(function(d) {
+    success: function (packages) {
+      packages.forEach(function (d) {
         appendPackage(d)
       })
     }
   })
 }
+
 function appendPackage(package) {
   $('#packageList').append(createPackageLi(package))
 }
+
 function createPackageLi(package) {
   return $(`<li id="${package.id}">
     <span>Solution Package Name: </span> <a href="#">${package.name}</a>
@@ -18,8 +22,9 @@ function createPackageLi(package) {
 }
 
 function showPackage(packageId) {
+  this.packageId = packageId
   $.ajax('/api/packages/' + packageId, {
-    success: function(package) {
+    success: function (package) {
       showPackageDetail(package)
     }
   })
@@ -40,6 +45,35 @@ function showPackageDetail(package) {
   </div>
 </div>`)
   )
+  $('#sivSection').show()
+  appendSivs()
+}
+
+function appendSivs() {
+  $('#assignSivs').html()
+  $.ajax('/api/scopeitems', {
+    success: function (scopeitems) {
+      scopeitems.forEach(function (siv) {
+        $('#assignSivs').append($(`<option value=${siv.id}>${siv.name}</option>`))
+      })
+    }
+  })
+}
+
+function assignSiv(packageId) {
+  var $selectedSiv = $('#assignSivs option:selected')
+  $.ajax('/api/packages/assignsi/' + this.packageId, {
+    method: 'POST',
+    data: {
+      siId: $selectedSiv.val
+    },
+    success: function (siv) {
+      $('#assignedSivs').append($(`<div>Assigned Scope Item </div>
+      <div>Assignments ID: ${siv.id}</div>
+      <div>ScopeItem ID: ${siv.id}</div>
+      <div>ScopeItem Name: ${siv.name}</div>`))
+    }
+  })
 }
 
 function addSolutionPackage() {
@@ -49,7 +83,7 @@ function addSolutionPackage() {
     data: {
       text: $packageInput.val()
     },
-    success: function(package) {
+    success: function (package) {
       appendPackage(package)
       $packageInput.val('')
     }
@@ -63,7 +97,7 @@ function updateSolutionPackage(id) {
     data: {
       text: $packageInput.val()
     },
-    success: function() {
+    success: function () {
       $packageInput.val('')
     }
   })
@@ -72,7 +106,7 @@ function updateSolutionPackage(id) {
 function removePackage(id) {
   $.ajax(`/api/packages/${id}`, {
     method: 'DELETE',
-    success: function(resp) {
+    success: function (resp) {
       removePackageLi(id)
       $('#showPackageDetail').html('')
     }

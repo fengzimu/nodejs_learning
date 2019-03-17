@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta charset="utf-8" />
-    <title>Solution Packages</title>
-  </head>
-  <body>
-    <div id="linkToHome">
-      <a href="../home.html">Home</a>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <title>Solution Packages</title>
+</head>
+
+<body>
+  <div id="linkToHome">
+    <a href="../home.html">Home</a>
+  </div>
+  <div id="packageList"></div>
+  <div id="addPackages">
+    <div>
+      <input id="packageInput" type="text" />
     </div>
-    <div id="packageList"></div>
-    <div id="addPackages">
-      <div>
-        <input id="packageInput" type="text" />
-      </div>
-      <div>
-        <button onclick="addSolutionPackage()">Add Solution Package</button>
-      </div>
+    <div>
+      <button onclick="addSolutionPackage()">Add Solution Package</button>
     </div>
-    <div id="showPackageDetail"></div>
-  </body>
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-  <script src="./solutionpackage.js"></script>
+  </div>
+  <div id="showPackageDetail"></div>
+  <div id="sivSection" hidden="hidden">
+    <select id="assignSivs"></select>
+    <button onclick="assignSiv()">Assign SI</button>
+    <div id="assignedSivs"> </div>
+  </div>
+
+</body>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="./solutionpackage.js"></script>
+
 </html>
