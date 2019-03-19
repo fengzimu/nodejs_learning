@@ -60,13 +60,11 @@ function appendSivs() {
   })
 }
 
-function assignSiv(packageId) {
+function assignSiv() {
   var $selectedSiv = $('#assignSivs option:selected')
-  $.ajax('/api/packages/assignsi/' + this.packageId, {
+  $.ajax(`/api/packages/${this.packageId}/assignsi/${$selectedSiv.val()}`, {
     method: 'POST',
-    data: {
-      siId: $selectedSiv.val
-    },
+    data: {},
     success: function (siv) {
       $('#assignedSivs').append($(`<div>Assigned Scope Item </div>
       <div>Assignments ID: ${siv.id}</div>

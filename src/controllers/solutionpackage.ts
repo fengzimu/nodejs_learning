@@ -57,8 +57,8 @@ res.send(err)
 export const assignSiv = async (req:Request, res:Response) =>  {
 try {
 const id = req.params.id
-    const siId = req.body.siId
-    await SolutionPackageService.assignSiv(id, siId)
+    const sId = req.params.sId
+    await SolutionPackageService.assignSiv(id, sId)
 res.send('ok')
 }catch (err) {
 res.status(500)

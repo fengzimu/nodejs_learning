@@ -9,6 +9,6 @@ ApiRouter.get('/', SolutionPackageController.getPackages)
 ApiRouter.post('/', SolutionPackageController.addPackage)
 ApiRouter.put('/:id', SolutionPackageController.updatePackage)
 ApiRouter.delete('/:id', SolutionPackageController.removePackage)
-ApiRouter.post('/assignsi/:id', SolutionPackageController.assignSiv)
+ApiRouter.post('/:id/assignsi/:sId', SolutionPackageController.assignSiv)
 app.use('/api/packages', ApiRouter)
 }
